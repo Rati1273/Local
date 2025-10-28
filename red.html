@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Red Boxes Alert</title>
+  <style>
+    body {
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 120px);
+      grid-gap: 20px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      font-family: Arial, sans-serif;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+
+    .box:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box" onclick="showAlert(1)">Box 1</div>
+    <div class="box" onclick="showAlert(2)">Box 2</div>
+    <div class="box" onclick="showAlert(3)">Box 3</div>
+    <div class="box" onclick="showAlert(4)">Box 4</div>
+  </div>
+
+  <script>
+    function showAlert(number) {
+      alert("You clicked on Box " + number);
+    }
+  </script>
+</body>
+</html>

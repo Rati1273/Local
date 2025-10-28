@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <form action="" class="border max-w-md mx-auto p-5 mt-5">
+    <input type="text" class="border w-full name" placeholder="Enter your name">
+    <label for="">Email</label>
+    <input type="email" class="border w-full email" placeholder="Enter your email">
+    <button type="submit" class="rounded-md py-2 px-4 bg-blue-500 mt-5 w-full btn">Submit</button>
+  </form>
+
+  <script>
+    // const s_name = document.querySelector('.name').value
+    // const s_branch = document.querySelector('.branch').value
+    // const s_email = document.querySelector('.email').value
+
+    const s_btn = document.querySelector('.btn');
+    // console.log(s_name);
+
+    s_btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const s_name = document.querySelector('.name').value;
+      const s_branch = document.querySelector('.branch')?.value;
+      const s_email = document.querySelector('.email').value;
+      console.log(s_name, s_branch, s_email);
+    });
+  </script>
+</body>
+</html>

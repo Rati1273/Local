@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badal Variety Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #fff8f8;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 900;
+      color: #b91c1c;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 4px #ffb3b3;
+    }
+
+    .product-card {
+      border: 1px solid #ef4444;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      width: 200px;
+      background: #fff;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 14px;
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #dc2626;
+    }
+
+    #filter_container {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    #s_btn {
+      display: block;
+      margin: 0 auto 15px auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #b91c1c;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 6px;
+      margin-top: 20px;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Badal Variety Store</h1>
+
+  <div id="filter_container">
+    <button class="filter-btn" data-category="all">All</button>
+    <button class="filter-btn" data-category="men">Men</button>
+    <button class="filter-btn" data-category="women">Women</button>
+    <button class="filter-btn" data-category="kids">Kids</button>
+  </div>
+
+  <button id="s_btn">Show Products</button>
+
+  <div id="div_container" class="container"></div>
+
+  <footer>
+    📍 NEAR GIFT COLLEGE, GANGAPADA, KHORDHA
+  </footer>
+
+  <script>
+    const products = [
+      { category: 'men', subcategory: 't-shirt', price: 100, discount: 10 },
+      { category: 'women', subcategory: 'dress', price: 250, discount: 15 },
+      { category: 'kids', subcategory: 'shorts', price: 80, discount: 5 },
+      { category: 'men', subcategory: 'jeans', price: 300, discount: 20 },
+      { category: 'women', subcategory: 'skirt', price: 200, discount: 10 },
+      { category: 'kids', subcategory: 't-shirt', price: 90, discount: 8 },
+      { category: 'men', subcategory: 'jacket', price: 500, discount: 25 },
+      { category: 'women', subcategory: 'top', price: 180, discount: 12 },
+      { category: 'kids', subcategory: 'jacket', price: 150, discount: 10 },
+      { category: 'men', subcategory: 'shirt', price: 220, discount: 18 },
+      { category: 'women', subcategory: 'jeans', price: 320, discount: 20 },
+      { category: 'kids', subcategory: 'jeans', price: 110, discount: 7 },
+      { category: 'men', subcategory: 'hoodie', price: 350, discount: 22 },
+      { category: 'women', subcategory: 'sweater', price: 280, discount: 14 },
+      { category: 'kids', subcategory: 'sweater', price: 130, discount: 6 }
+    ];
+
+    const s_btn = document.getElementById('s_btn');
+    const div_container = document.getElementById('div_container');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    function renderProducts(filteredProducts) {
+      div_container.innerHTML = '';
+
+      if (filteredProducts.length === 0) {
+        div_container.innerHTML = '<p>No products found.</p>';
+        return;
+      }
+
+      filteredProducts.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        const title = document.createElement('h3');
+        title.textContent = `${item.category.toUpperCase()} - ${item.subcategory}`;
+
+        const price = document.createElement('p');
+        price.textContent = `Price: ₹${item.price}`;
+
+        const discount = document.createElement('p');
+        discount.textContent = `Discount: ${item.discount}%`;
+
+        const finalPrice = document.createElement('p');
+        const discounted = item.price - (item.price * item.discount / 100);
+        finalPrice.textContent = `After Discount: ₹${discounted.toFixed(2)}`;
+
+        card.appendChild(title);
+        card.appendChild(price);
+        card.appendChild(discount);
+        card.appendChild(finalPrice);
+
+        div_container.appendChild(card);
+      });
+    }
+
+    s_btn.addEventListener('click', () => {
+      renderProducts(products);
+    });
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+        if (category === 'all') {
+          renderProducts(products);
+        } else {
+          const filtered = products.filter(p => p.category === category);
+          renderProducts(filtered);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
